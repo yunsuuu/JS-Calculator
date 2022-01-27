@@ -17,12 +17,18 @@ const $result = document.querySelector("#result");
 
 // 계산기 숫자 클릭시 발생하는 함수 (e.target 사용ver)
 const onClickNumber = (e) => {
-  if(operator){ 
-      numTwo += e.target.innerText;
-  } 
-  else {
-      numOne += e.target.innerText;
+  if(!operator){ // 연산자가 클릭되지 않은 경우(비어있다)
+    numOne += e.target.innerText;
+    $result.value += e.target.innerText;
+    return;
+    // return 다음에 오는 else 생략 가능
   }
+  // 비어있지 않다
+  if(!numTwo){ // numTwo가 없는 상황
+    // 계산기 처음 실행할 때(numTwo를 처음 클릭할 때)에서는 화면에 보이는 숫자를 초기화
+    $result.value = "";
+  }
+  numTwo += e.target.innerText;
   $result.value += e.target.innerText;
 };
 
